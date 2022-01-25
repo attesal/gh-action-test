@@ -3,6 +3,7 @@ name: 'Do stuff on release'
 on:
   release:
     types: [edited, published]
+  workflow_dispatch:
 
 jobs:
   release:
