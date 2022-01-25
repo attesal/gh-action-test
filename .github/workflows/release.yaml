@@ -17,7 +17,7 @@ jobs:
         run: git describe --tags
       - name: Release staging
         if: ${{ github.event.release.prerelease }}
-        uses: './.github/workflows/deploy-staging'
+        uses: './.github/actions/deploy-staging'
       - name: Release production
         if: ${{ !github.event.release.prerelease }}
-        uses: './.github/workflows/deploy-staging'
+        uses: './.github/actions/deploy-prod'
