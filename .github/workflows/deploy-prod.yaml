@@ -8,6 +8,8 @@ on:
 jobs:
   release:
     if: ${{ !github.event.release.prerelease }}
+    environment:
+      name: prod
     name: Deploy latest release (not prerelease) to prod
     runs-on: ubuntu-latest
     steps:
@@ -17,3 +19,5 @@ jobs:
         run: echo Prerelease ${{ github.event.release.prerelease }}
       - name: Current tag
         run: git describe --tags
+      - name: Env secret
+        run: echo ${{ secrets.SECRET }}
