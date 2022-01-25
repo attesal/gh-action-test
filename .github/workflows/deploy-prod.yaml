@@ -1,0 +1,7 @@
+name: Deploy production
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 'deploy-prod.yaml:deploy'
+      run: echo deploy-prod.yaml:deploy && git describe --tags

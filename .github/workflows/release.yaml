@@ -2,7 +2,7 @@ name: 'Do stuff on release'
 
 on:
   release:
-    types: [created, edited, published]
+    types: [edited, published]
 
 jobs:
   release:
@@ -11,5 +11,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: 'Current tag'
-        run: 'git describe --tags'
+      - name: Is it prerelease?
+        run: echo Prerelease ${{ github.event.release.prerelease }}
+      - name: Current tag
+        run: git describe --tags
+      - name: Release staging
+        if: ${{ github.event.release.prerelease }}
+        uses: './.github/workflows/deploy-staging'
+      - name: Release production
+        if: ${{ !github.event.release.prerelease }}
+        uses: './.github/workflows/deploy-staging'
