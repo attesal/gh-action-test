@@ -1,0 +1,13 @@
+name: 'Do stuff on release'
+
+on:
+  release:
+    types: [created, edited, published]
+
+jobs:
+  release:
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: 'Echo current branch'
+        run: 'echo git describe --tags'
