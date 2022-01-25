@@ -5,9 +5,7 @@ on:
     types: [edited]
 
 jobs:
-  
   onEdited:
     - run: |
-      echo PreRelease ${{ github.event.release.prerelease }}
-      git describe --tags
-
+        echo PreRelease ${{ github.event.release.prerelease }}
+        git describe --tags
