@@ -6,6 +6,10 @@ on:
 
 jobs:
   onEdited:
-    run: |
-      echo PreRelease ${{ github.event.release.prerelease }}
-      git describe --tags
+    name: On edited
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log out information about release
+        run: |
+          echo PreRelease ${{ github.event.release.prerelease }}
+          git describe --tags
