@@ -1,0 +1,13 @@
+name: 'Release edited'
+
+on:
+  release:
+    types: [edited]
+
+jobs:
+  
+  onEdited:
+    - run: |
+      echo PreRelease ${{ github.event.release.prerelease }}
+      git describe --tags
+
