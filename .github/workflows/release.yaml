@@ -6,6 +6,8 @@ on:
 
 jobs:
   release:
+    name: Test stuff
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
