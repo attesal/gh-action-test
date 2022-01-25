@@ -1,7 +1,0 @@
-name: Deploy staging
-
-runs:
-  using: 'composite'
-  steps:
-    - name: 'deploy-staging.yaml:deploy'
-      run: echo deploy-staging.yaml:deploy && git describe --tags

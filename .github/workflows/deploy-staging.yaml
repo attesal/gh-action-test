@@ -1,0 +1,18 @@
+name: 'Deploy staging'
+
+on:
+  release:
+    types: [edited, published]
+  workflow_dispatch:
+
+jobs:
+  release:
+    name: Deploy latest whatever release to staging
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Is it prerelease?
+        run: echo Prerelease ${{ github.event.release.prerelease }}
+      - name: Current tag
+        run: git describe --tags

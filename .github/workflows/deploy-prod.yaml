@@ -1,4 +1,4 @@
-name: 'Do stuff on release'
+name: 'Deploy prod'
 
 on:
   release:
@@ -7,7 +7,8 @@ on:
 
 jobs:
   release:
-    name: Test stuff
+    if: ${{ !github.event.release.prerelease }}
+    name: Deploy latest release (not prerelease) to prod
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -16,9 +17,3 @@ jobs:
         run: echo Prerelease ${{ github.event.release.prerelease }}
       - name: Current tag
         run: git describe --tags
-      - name: Release staging
-        if: ${{ github.event.release.prerelease }}
-        uses: './.github/actions/deploy-staging'
-      - name: Release production
-        if: ${{ !github.event.release.prerelease }}
-        uses: './.github/actions/deploy-prod'
