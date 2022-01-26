@@ -5,7 +5,7 @@ inputs:
   DIST_PATH:
     description: 'The folder to copy the files to'
     required: false
-    default: '~'
+    default: ${{ github.action_path }}
   MODE:
     description: Build mode
     required: false

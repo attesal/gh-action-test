@@ -30,7 +30,7 @@ jobs:
         name: Build
         uses: ./.github/actions/build
         with:
-          DIST_PATH: '~'
+          DIST_PATH: ${{ github.action_path }}
           MESSAGE: ${{ secrets.SECRET }}
       - name: Deploy
         uses: ./.github/actions/deploy
@@ -51,7 +51,7 @@ jobs:
         name: Build
         uses: ./.github/actions/build
         with:
-          DIST_PATH: '~'
+          DIST_PATH: ${{ github.action_path }}
           MODE: 'staging'
           MESSAGE: ${{ secrets.SECRET }}
       - name: Deploy
