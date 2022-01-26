@@ -1,0 +1,31 @@
+name: Deploy tag to environment
+
+on:
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: Tag to deploy
+        default: latest
+        required: true
+      environment:
+        description: Environment where to deploy
+        type: environment
+        required: true
+        default: dev
+
+jobs:
+  deploy:
+    environment:
+      name: ${{ inputs.environment }}
+    name: Deploy ${{ inputs.tag }} to ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ inputs.tag }}
+      - name: Log out information
+        run: |
+          echo Deploy ${{ inputs.tag }} to ${{ inputs.environment }}
+          git describe --tags
+          git log --pretty=oneline --decorate | head -n 1
