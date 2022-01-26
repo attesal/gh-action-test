@@ -16,13 +16,9 @@ runs:
       run: |
         echo Should release this tag to ${{ inputs.ENVIRONMENT }}
         git describe --tags
-        - name: Use Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: '16.x'
     - name: Log current files
       shell: bash
       run: |
         echo go to here cd ${{github.action_path}}
         cd ${{github.action_path}}
-        cat ${{ inputs.DIST_PATH }}/dist/assets/index.*.js
+        cat dist/assets/index.*.js
