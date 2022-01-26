@@ -14,7 +14,4 @@ runs:
       run: |
         echo Should release this tag to ${{ inputs.ENVIRONMENT }}
         git describe --tags
-    - name: Log current files
-      shell: bash
-      run: |
-        ls
+        cat dist/assets/index*js

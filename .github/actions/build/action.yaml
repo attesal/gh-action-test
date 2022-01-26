@@ -13,10 +13,11 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Use Node.js
-      uses: actions/setup-node@v1
+    - name: Setup
+      uses: actions/setup-node@v2
       with:
-        node-version: '16.x'
+        node-version: '16'
+        cache: 'yarn'
     - name: Build frontend
       shell: bash
       env:
@@ -24,4 +25,3 @@ runs:
       run: |
         yarn install
         yarn build --mode ${{ inputs.MODE }}
-        ls
