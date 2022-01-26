@@ -1,0 +1,30 @@
+name: Build App
+description: Steps to say hello
+
+inputs:
+  mode:
+    description: Build mode
+    required: false
+    default: production
+  message:
+    description: Message
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '16.x'
+    - name: Build frontend
+      shell: bash
+      env:
+        VITE_MESSAGE: ${{ inputs.message}}
+      run: |
+        yarn install
+        yarn build --mode ${{ inputs.mode }}
+        cd dist/assets/
+        cat `ls -1 | grep 'index.*.js'`

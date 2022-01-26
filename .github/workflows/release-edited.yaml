@@ -26,6 +26,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Build
+        uses: ./.github/actions/build
+        with:
+          message: ${{ secrets.SECRET }}
       - name: Deploy
         uses: ./.github/actions/deploy
         with:
@@ -41,6 +45,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Build
+        uses: ./.github/actions/build
+        with:
+          mode: staging
+          message: ${{ secrets.SECRET }}
       - name: Deploy
         uses: ./.github/actions/deploy
         with:
