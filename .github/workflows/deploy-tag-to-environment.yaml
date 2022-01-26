@@ -3,9 +3,8 @@ name: Deploy tag to environment
 on:
   workflow_dispatch:
     inputs:
-      tags:
+      tag:
         description: Tag to deploy
-        default: ${{ github.ref }}
         required: true
       environment:
         description: Environment where to deploy
