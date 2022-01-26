@@ -1,19 +1,12 @@
 name: Deploy to bucket
-description: Steps to say hello
+description: Deploy files to bucket
 
 inputs:
-  environment:
+  DIST_PATH:
+    description: Path to built files
+    required: true
+  ENVIRONMENT:
     description: Environment
-    required: true
-  secretInput:
-    description: 'ssh'
-    required: true
-  mode:
-    description: Build mode
-    required: false
-    default: production
-  message:
-    description: Message
     required: true
 
 runs:
@@ -24,21 +17,15 @@ runs:
     - name: Current tag
       shell: bash
       run: |
-        echo Should release this tag to ${{ inputs.environment }}
+        echo Should release this tag to ${{ inputs.ENVIRONMENT }}
         git describe --tags
-    - name: Use Node.js
+        - name: Use Node.js
       uses: actions/setup-node@v1
       with:
         node-version: '16.x'
-    - name: Build frontend
-      shell: bash
-      env:
-        VITE_MESSAGE: ${{ inputs.message }}
-      run: |
-        yarn install
-        yarn build --mode ${{ inputs.mode }}
-        cd dist/assets/
-        cat `ls -1 | grep 'index.*.js'`
     - name: Log current files
       shell: bash
-      run: ls
+      run: |
+        echo ${{ inputs.DIST_PATH }}
+        cd ${{ inputs.DIST_PATH }}
+        cat ${{ inputs.DIST_PATH }}/dist/assets/index.*.js

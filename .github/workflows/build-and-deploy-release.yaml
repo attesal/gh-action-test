@@ -1,4 +1,4 @@
-name: 'Deploy release'
+name: 'Build and deploy release'
 
 on:
   release:
@@ -26,15 +26,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Build
+      - id: build
+        name: Build
         uses: ./.github/actions/build
         with:
-          message: ${{ secrets.SECRET }}
+          DIST_PATH: '~'
+          MESSAGE: ${{ secrets.SECRET }}
       - name: Deploy
         uses: ./.github/actions/deploy
         with:
-          environment: prod
-          secretInput: ${{ secrets.SECRET }}
+          DIST_PATH: ${{ steps.build.outputs.DIST_PATH }}
+          ENVIRONMENT: 'prod'
 
   deploy_to_staging:
     if: ${{ github.event.release.prerelease }}
@@ -45,13 +47,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Build
+      - id: build
+        name: Build
         uses: ./.github/actions/build
         with:
-          mode: staging
-          message: ${{ secrets.SECRET }}
+          DIST_PATH: '~'
+          MODE: 'staging'
+          MESSAGE: ${{ secrets.SECRET }}
       - name: Deploy
         uses: ./.github/actions/deploy
         with:
-          environment: staging
-          secretInput: ${{ secrets.SECRET }}
+          DIST_PATH: ${{ steps.build.outputs.DIST_PATH }}
+          ENVIRONMENT: 'staging'

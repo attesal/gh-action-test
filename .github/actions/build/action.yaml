@@ -1,14 +1,22 @@
 name: Build App
-description: Steps to say hello
+description: Build files and output path to dist
 
 inputs:
-  mode:
+  DIST_PATH:
+    description: 'The folder to copy the files to'
+    required: false
+    default: '~'
+  MODE:
     description: Build mode
     required: false
     default: production
-  message:
+  MESSAGE:
     description: Message
     required: true
+outputs:
+  DIST_PATH:
+    description: 'Dist path'
+    value: ${{ steps.build.outputs.filesNo }}
 
 runs:
   using: 'composite'
@@ -22,9 +30,9 @@ runs:
     - name: Build frontend
       shell: bash
       env:
-        VITE_MESSAGE: ${{ inputs.message}}
+        VITE_MESSAGE: ${{ inputs.MESSAGE }}
       run: |
         yarn install
-        yarn build --mode ${{ inputs.mode }}
-        cd dist/assets/
-        cat `ls -1 | grep 'index.*.js'`
+        yarn build --mode ${{ inputs.MODE }}
+        mv dist ${{ inputs.DIST_PATH }}
+        echo '::set-output name=DIST_PATH::${{ inputs.DIST_PATH }}'
