@@ -24,7 +24,7 @@ runs:
       env:
         VITE_MESSAGE: ${{ inputs.MESSAGE }}
       run: |
-        cd ${{github.action_path}}
+        cd ${{ github.workspace }}
         yarn install
         yarn build --mode ${{ inputs.MODE }}
-        echo dist here ${{github.action_path}}
+        echo dist here ${{ github.workspace }}

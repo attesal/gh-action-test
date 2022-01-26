@@ -19,6 +19,8 @@ runs:
     - name: Log current files
       shell: bash
       run: |
-        echo go to here cd ${{github.action_path}}
-        cd ${{github.action_path}}
+        echo $PWD
+        echo go to here cd ${{ github.workspace }}
+        cd ${{ github.workspace }}
+        echo $PWD
         cat dist/assets/index.*.js
