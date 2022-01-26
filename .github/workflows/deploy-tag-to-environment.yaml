@@ -15,16 +15,15 @@ on:
 jobs:
   deploy:
     environment:
-      name: ${{ inputs.environment }}
-    name: Deploy ${{ inputs.tag }} to ${{ inputs.environment }}
+      name: ${{ github.event.inputs.environment }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           ref: ${{ inputs.tag }}
-      - name: Log out information
+      - name: Deploy ${{ github.event.inputs.tag }} to ${{ github.event.inputs.environment }}
         run: |
-          echo Deploy ${{ inputs.tag }} to ${{ inputs.environment }}
+          echo Deploy ${{ github.event.inputs.tag }} to ${{ github.event.inputs.environment }}
           git describe --tags
           git log --pretty=oneline --decorate | head -n 1
