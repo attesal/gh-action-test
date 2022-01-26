@@ -34,5 +34,6 @@ runs:
       run: |
         yarn install
         yarn build --mode ${{ inputs.MODE }}
+        echo DIST_PATH ${{ inputs.DIST_PATH }}
         mv dist ${{ inputs.DIST_PATH }}
         echo '::set-output name=DIST_PATH::${{ inputs.DIST_PATH }}'
