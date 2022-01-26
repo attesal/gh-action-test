@@ -5,7 +5,7 @@ on:
     inputs:
       tags:
         description: Tag to deploy
-        default: latest
+        default: ${{ github.ref }}
         required: true
       environment:
         description: Environment where to deploy
