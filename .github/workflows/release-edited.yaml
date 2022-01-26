@@ -13,6 +13,6 @@ jobs:
         uses: actions/checkout@v2
       - name: Log out information about release
         run: |
-          echo Event type that triggered the workflow: ${{ github.event.type }}
+          echo Event type that triggered the workflow: ${{ github.event }}
           echo PreRelease ${{ github.event.release.prerelease }}
           git describe --tags
