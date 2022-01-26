@@ -22,10 +22,8 @@ jobs:
 
       - if: ${{ github.event.inputs.environment == prod }}
         name: Deploy to production
-        run: echo Deploy to production
         uses: ./.github/workflows/deploy-prod
 
       - if: ${{ github.event.inputs.environment == staging }}
         name: Deploy to stagin
-        run: echo Deploy to stagin
         uses: ./.github/workflows/deploy-staging
