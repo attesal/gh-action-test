@@ -2,10 +2,6 @@ name: Build App
 description: Build files and output path to dist
 
 inputs:
-  DIST_PATH:
-    description: 'The folder to copy the files to'
-    required: false
-    default: ${{ github.action_path }}
   MODE:
     description: Build mode
     required: false
@@ -13,10 +9,6 @@ inputs:
   MESSAGE:
     description: Message
     required: true
-outputs:
-  DIST_PATH:
-    description: 'Dist path'
-    value: ${{ steps.build.outputs.filesNo }}
 
 runs:
   using: 'composite'
@@ -32,8 +24,7 @@ runs:
       env:
         VITE_MESSAGE: ${{ inputs.MESSAGE }}
       run: |
+        cd ${{github.action_path}}
         yarn install
         yarn build --mode ${{ inputs.MODE }}
-        echo DIST_PATH ${{ inputs.DIST_PATH }}
-        mv dist ${{ inputs.DIST_PATH }}
-        echo '::set-output name=DIST_PATH::${{ inputs.DIST_PATH }}'
+        echo dist here ${{github.action_path}}

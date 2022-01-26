@@ -2,9 +2,6 @@ name: Deploy to bucket
 description: Deploy files to bucket
 
 inputs:
-  DIST_PATH:
-    description: Path to built files
-    required: true
   ENVIRONMENT:
     description: Environment
     required: true
@@ -26,6 +23,6 @@ runs:
     - name: Log current files
       shell: bash
       run: |
-        echo ${{ inputs.DIST_PATH }}
-        cd ${{ inputs.DIST_PATH }}
+        echo go to here cd ${{github.action_path}}
+        cd ${{github.action_path}}
         cat ${{ inputs.DIST_PATH }}/dist/assets/index.*.js

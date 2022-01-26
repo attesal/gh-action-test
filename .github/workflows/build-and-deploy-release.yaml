@@ -30,12 +30,10 @@ jobs:
         name: Build
         uses: ./.github/actions/build
         with:
-          DIST_PATH: ${{ github.action_path }}
           MESSAGE: ${{ secrets.SECRET }}
       - name: Deploy
         uses: ./.github/actions/deploy
         with:
-          DIST_PATH: ${{ steps.build.outputs.DIST_PATH }}
           ENVIRONMENT: 'prod'
 
   deploy_to_staging:
@@ -51,11 +49,9 @@ jobs:
         name: Build
         uses: ./.github/actions/build
         with:
-          DIST_PATH: ${{ github.action_path }}
           MODE: 'staging'
           MESSAGE: ${{ secrets.SECRET }}
       - name: Deploy
         uses: ./.github/actions/deploy
         with:
-          DIST_PATH: ${{ steps.build.outputs.DIST_PATH }}
           ENVIRONMENT: 'staging'
