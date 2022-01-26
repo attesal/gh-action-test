@@ -24,6 +24,4 @@ runs:
       run: echo ${{ inputs.secretInput }}
     - name: Log current files
       shell: bash
-      run: |
-        cd dist/assets/
-        cat `ls -1 | grep 'index.*.js'`
+      run: ls
