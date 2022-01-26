@@ -25,5 +25,4 @@ jobs:
       - name: Deploy ${{ github.event.inputs.tag }} to ${{ github.event.inputs.environment }}
         run: |
           echo Deploy ${{ github.event.inputs.tag }} to ${{ github.event.inputs.environment }}
-          git describe --tags
           git log --pretty=oneline --decorate | head -n 1
