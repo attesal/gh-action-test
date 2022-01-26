@@ -1,9 +1,7 @@
 name: 'Deploy staging'
 
 on:
-  release:
-    types: [edited, published]
-  workflow_dispatch:
+  workflow_call:
 
 jobs:
   release:

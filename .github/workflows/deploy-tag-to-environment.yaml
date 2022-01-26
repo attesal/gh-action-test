@@ -3,9 +3,6 @@ name: Deploy tag to environment
 on:
   workflow_dispatch:
     inputs:
-      tag:
-        description: Tag to deploy
-        required: true
       environment:
         description: Environment where to deploy
         type: environment
@@ -21,8 +18,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: ${{ inputs.tag }}
-      - name: Deploy ${{ github.event.inputs.tag }} to ${{ github.event.inputs.environment }}
-        run: |
-          echo Deploy ${{ github.event.inputs.tag }} to ${{ github.event.inputs.environment }}
-          git log --pretty=oneline --decorate | head -n 1
+          ref: main
+
+      - if: ${{ github.event.inputs.environment == prod }}
+        name: Deploy to production
+        run: echo Deploy to production
+        uses: ./.github/workflows/deploy-prod
+
+      - if: ${{ github.event.inputs.environment == staging }}
+        name: Deploy to stagin
+        run: echo Deploy to stagin
+        uses: ./.github/workflows/deploy-staging

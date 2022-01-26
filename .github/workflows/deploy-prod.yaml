@@ -1,13 +1,10 @@
 name: 'Deploy prod'
 
 on:
-  release:
-    types: [edited, published]
-  workflow_dispatch:
+  workflow_call:
 
 jobs:
   release:
-    if: ${{ !github.event.release.prerelease }}
     environment:
       name: prod
     name: Deploy latest release (not prerelease) to prod
