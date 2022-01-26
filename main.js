@@ -1,7 +1,4 @@
-const mode = import.meta.env.MODE;
-const message = import.meta.env.VITE_MESSAGE;
-
 document.querySelector('#app').innerHTML = `
-  <h1>MODE: ${mode}</h1>
-  <h2>MESSAGE: ${message}</h2>
+  <h1>MODE: ${import.meta.env.MODE}</h1>
+  <h2>MESSAGE: ${import.meta.env.VITE_MESSAGE}</h2>
 `;

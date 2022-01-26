@@ -8,6 +8,13 @@ inputs:
   secretInput:
     description: 'ssh'
     required: true
+  mode:
+    description: Build mode
+    required: false
+    default: production
+  message:
+    description: Message
+    required: true
 
 runs:
   using: 'composite'
@@ -19,9 +26,19 @@ runs:
       run: |
         echo Should release this tag to ${{ inputs.environment }}
         git describe --tags
-    - name: Env secret
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '16.x'
+    - name: Build frontend
       shell: bash
-      run: echo ${{ inputs.secretInput }}
+      env:
+        VITE_MESSAGE: ${{ inputs.message }}
+      run: |
+        yarn install
+        yarn build --mode ${{ inputs.mode }}
+        cd dist/assets/
+        cat `ls -1 | grep 'index.*.js'`
     - name: Log current files
       shell: bash
       run: ls
