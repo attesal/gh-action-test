@@ -37,7 +37,6 @@ jobs:
           ENVIRONMENT: 'prod'
 
   deploy_to_staging:
-    if: ${{ github.event.release.prerelease }}
     name: Deploy to staging
     runs-on: ubuntu-latest
     environment:

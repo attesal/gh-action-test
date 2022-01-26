@@ -19,8 +19,4 @@ runs:
     - name: Log current files
       shell: bash
       run: |
-        echo $PWD
-        echo go to here cd ${{ github.workspace }}
-        cd ${{ github.workspace }}
-        echo $PWD
         ls
