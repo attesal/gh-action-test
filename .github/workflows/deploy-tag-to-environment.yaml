@@ -20,10 +20,10 @@ jobs:
         with:
           ref: main
 
-      - if: ${{ github.event.inputs.environment == prod }}
+      - if: ${{ github.event.inputs.environment == 'prod' }}
         name: Deploy to production
         uses: ./.github/workflows/deploy-prod
 
-      - if: ${{ github.event.inputs.environment == staging }}
+      - if: ${{ github.event.inputs.environment == 'staging' }}
         name: Deploy to stagin
         uses: ./.github/workflows/deploy-staging
