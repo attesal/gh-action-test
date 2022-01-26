@@ -23,4 +23,4 @@ runs:
         echo go to here cd ${{ github.workspace }}
         cd ${{ github.workspace }}
         echo $PWD
-        cat dist/assets/index.*.js
+        ls

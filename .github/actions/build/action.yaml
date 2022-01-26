@@ -24,7 +24,9 @@ runs:
       env:
         VITE_MESSAGE: ${{ inputs.MESSAGE }}
       run: |
+        echo $PWD
         cd ${{ github.workspace }}
+        echo $PWD
         yarn install
         yarn build --mode ${{ inputs.MODE }}
-        echo dist here ${{ github.workspace }}
+        ls
